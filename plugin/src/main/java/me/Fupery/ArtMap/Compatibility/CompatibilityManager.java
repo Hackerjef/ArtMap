@@ -150,8 +150,6 @@ public class CompatibilityManager implements RegionHandler {
     private ReflectionHandler loadReflectionHandler() {
         ReflectionHandler denizenHandler = new DenizenCompat();
         if (denizenHandler.isLoaded()) return denizenHandler;
-        ReflectionHandler iDisguiseHandler = new iDisguiseCompat();
-        if (iDisguiseHandler.isLoaded()) return iDisguiseHandler;
         return new VanillaReflectionHandler();
     }
 
