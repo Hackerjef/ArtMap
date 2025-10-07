@@ -83,9 +83,25 @@ public class CompatibilityManager implements RegionHandler {
 
         String bukkitVersion = Bukkit.getBukkitVersion();
         if (Package.getPackage("io.papermc.paper") != null) {
+            if (bukkitVersion.contains("1.21.9")) {
+                ArtMap.instance().getLogger().info("enabling 1.21.9 map handler");
+                mapHandler = new MapHandler_1_21_9();
+            }
             if (bukkitVersion.contains("1.21.8")) {
-                ArtMap.instance().getLogger().info("Detected Paper 1.21.8, enabling 1.21.8 map handler");
+                ArtMap.instance().getLogger().info("enabling 1.21.8 map handler");
                 mapHandler = new MapHandler_1_21_8();
+            }
+            if (bukkitVersion.contains("1.21.7")) {
+                ArtMap.instance().getLogger().info("enabling 1.21.7 map handler");
+                mapHandler = new MapHandler_1_21_7();
+            }
+            if (bukkitVersion.contains("1.21.6")) {
+                ArtMap.instance().getLogger().info("enabling 1.21.6 map handler");
+                mapHandler = new MapHandler_1_21_6();
+            }
+            if (bukkitVersion.contains("1.21.5")) {
+                ArtMap.instance().getLogger().info("enabling 1.21.5 map handler");
+                mapHandler = new MapHandler_1_21_5();
             }
         }
 
