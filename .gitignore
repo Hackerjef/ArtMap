@@ -19,3 +19,7 @@ license.rtf
 **/.settings/
 .factorypath
 /node_modules/
+.mvn/.develocity/
+.gradle/
+
+**/build/

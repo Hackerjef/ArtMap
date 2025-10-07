@@ -50,7 +50,7 @@ public class Map {
     }
 
     public byte[] readData() {
-        return ArtMap.instance().getReflection().getMap(getMap());
+        return ArtMap.instance().getMapHandler().getMap(getMap());
     }
 
     public void setRenderer(MapRenderer renderer) {
@@ -99,7 +99,7 @@ public class Map {
         if(this.mapView == null) {
             getMap();
         }
-        ArtMap.instance().getReflection().setWorldMap(mapView, map);
+        ArtMap.instance().getMapHandler().setWorldMap(mapView, map);
         if (updateRenderer) {
             MapRenderer renderer = new GenericMapRenderer(map);
             setRenderer(renderer);

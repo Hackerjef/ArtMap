@@ -124,7 +124,7 @@ public final class Database implements IDatabase {
 						// update
 						MapView newView = ArtMap.getMap(art.getMapId());
 						// Force update of map data
-						mapArt.get().getMap().setMap(ArtMap.instance().getReflection().getMap(newView), true);
+						mapArt.get().getMap().setMap(ArtMap.instance().getMapHandler().getMap(newView), true);
 						// Update database
 						CompressedMap map = CompressedMap.compress(copy.getOriginalId(), newView);
 						maps.updateMap(map);
@@ -324,7 +324,7 @@ public final class Database implements IDatabase {
             ArtMap.instance().getLogger().severe("MapView creation Failed!");
             return null;
 		}
-        ArtMap.instance().getReflection().setWorldMap(mapView, Map.BLANK_MAP);
+        ArtMap.instance().getMapHandler().setWorldMap(mapView, Map.BLANK_MAP);
         return new Map(mapView);
     }
 
@@ -370,13 +370,10 @@ public final class Database implements IDatabase {
      * file.
      * 
      * @param map The map to restore.
-     * @param softRrepair True - attempt to repair the map but do not modify the files on disk. False - Do not attempt to repair just notify.
-     * @param hardRrepair True - attempt to repair the map even if it means writing to disk. False - Do not attempt to repair just notify.
+     * @param softRepair True - attempt to repair the map but do not modify the files on disk. False - Do not attempt to repair just notify.
+     * @param hardRepair True - attempt to repair the map even if it means writing to disk. False - Do not attempt to repair just notify.
      * @return True if a map was found to be corruped.
-     * @throws SQLException
-     * @throws IllegalAccessException
-     * @throws NoSuchFieldException
-     */
+      */
     @Override
     public boolean restoreMap(Map map, boolean softRepair, boolean hardRepair) {
         try {

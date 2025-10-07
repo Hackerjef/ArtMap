@@ -18,7 +18,7 @@ public class CompressedMap extends MapId {
     }
 
     public static CompressedMap compress(MapView mapView) throws IOException {
-		return compress(mapView.getId(), ArtMap.instance().getReflection().getMap(mapView));
+		return compress(mapView.getId(), ArtMap.instance().getMapHandler().getMap(mapView));
     }
 
     public static CompressedMap compress(int mapId, byte[] map) throws IOException {
@@ -27,8 +27,8 @@ public class CompressedMap extends MapId {
     }
 
 	public static CompressedMap compress(int newId, MapView mapView) throws IOException {
-		byte[] compressed = new f32x32().generateBLOB(ArtMap.instance().getReflection().getMap(mapView));
-		return new CompressedMap(newId, Arrays.hashCode(ArtMap.instance().getReflection().getMap(mapView)), compressed);
+		byte[] compressed = new f32x32().generateBLOB(ArtMap.instance().getMapHandler().getMap(mapView));
+		return new CompressedMap(newId, Arrays.hashCode(ArtMap.instance().getMapHandler().getMap(mapView)), compressed);
 	}
 
     public byte[] getCompressedMap() {

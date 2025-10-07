@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+import me.Fupery.ArtMap.Compatibility.impl.*;
+import me.Fupery.ArtMap.api.Compatability.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -11,35 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Fupery.ArtMap.ArtMap;
-import me.Fupery.ArtMap.Compatibility.impl.ASkyBlockCompat;
-import me.Fupery.ArtMap.Compatibility.impl.BentoBoxCompat;
-import me.Fupery.ArtMap.Compatibility.impl.CMICompat;
-import me.Fupery.ArtMap.Compatibility.impl.GriefDefenderCompat;
-import me.Fupery.ArtMap.Compatibility.impl.GriefPreventionCompat;
-import me.Fupery.ArtMap.Compatibility.impl.HeadRetrieval_1_13;
-import me.Fupery.ArtMap.Compatibility.impl.HeadRetrieval_1_20_2;
-import me.Fupery.ArtMap.Compatibility.impl.MarriageMasterCompat;
-import me.Fupery.ArtMap.Compatibility.impl.Palette_1_13;
-import me.Fupery.ArtMap.Compatibility.impl.Palette_1_14;
-import me.Fupery.ArtMap.Compatibility.impl.Palette_1_16;
-import me.Fupery.ArtMap.Compatibility.impl.Palette_1_18;
-import me.Fupery.ArtMap.Compatibility.impl.EssentialsCompat;
-import me.Fupery.ArtMap.Compatibility.impl.PlotSquared4Compat;
-import me.Fupery.ArtMap.Compatibility.impl.PlotSquared5Compat;
-import me.Fupery.ArtMap.Compatibility.impl.PlotSquared6Compat;
-import me.Fupery.ArtMap.Compatibility.impl.PlotSquared7Compat;
-import me.Fupery.ArtMap.Compatibility.impl.RedProtectCompat;
-import me.Fupery.ArtMap.Compatibility.impl.ResidenceCompat;
-import me.Fupery.ArtMap.Compatibility.impl.SabreFactionsCompat;
-import me.Fupery.ArtMap.Compatibility.impl.TownyCompat;
-import me.Fupery.ArtMap.Compatibility.impl.USkyBlockCompat;
-import me.Fupery.ArtMap.Compatibility.impl.WorldGuardCompat;
 import me.Fupery.ArtMap.api.IArtMap;
 import me.Fupery.ArtMap.api.Colour.Palette;
-import me.Fupery.ArtMap.api.Compatability.EventListener;
-import me.Fupery.ArtMap.api.Compatability.IHeadsRetriever;
-import me.Fupery.ArtMap.api.Compatability.ReflectionHandler;
-import me.Fupery.ArtMap.api.Compatability.RegionHandler;
 import me.Fupery.ArtMap.api.Easel.ClickType;
 import me.Fupery.ArtMap.api.Utils.Version;
 import me.Fupery.ArtMap.api.Utils.VersionHandler;
@@ -51,6 +26,7 @@ public class CompatibilityManager implements RegionHandler {
     private ReflectionHandler reflectionHandler;
     private Palette palette;
     private IHeadsRetriever headsRetriever;
+    private IMapHandler mapHandler;
 
     public CompatibilityManager(JavaPlugin plugin) {
         regionHandlers = new ArrayList<>();
@@ -58,7 +34,6 @@ public class CompatibilityManager implements RegionHandler {
         loadRegionHandler("WorldGuard",WorldGuardCompat.class, "WorldGuard 7");
         //Disable as it is 1.12 and lower
         //loadRegionHandler("Factions",FactionsCompat.class, "Factions");
-        loadRegionHandler("Factions",SabreFactionsCompat.class, "Sabre Factions");
         loadRegionHandler("GriefDefender",GriefDefenderCompat.class,"Grief Defender");
         loadRegionHandler("GriefPrevention",GriefPreventionCompat.class,"Grief Prevention");
         loadRegionHandler("RedProtect",RedProtectCompat.class, "Red Protect");
@@ -104,6 +79,18 @@ public class CompatibilityManager implements RegionHandler {
         } else {
             headsRetriever = new HeadRetrieval_1_20_2();
         }
+
+
+        String bukkitVersion = Bukkit.getBukkitVersion();
+        if (Package.getPackage("io.papermc.paper") != null) {
+            if (bukkitVersion.contains("1.21.8")) {
+                ArtMap.instance().getLogger().info("Detected Paper 1.21.8, enabling 1.21.8 map handler");
+                mapHandler = new MapHandler_1_21_8();
+            }
+        }
+
+        if (mapHandler == null)
+            mapHandler = new MapHandler_1_21_4();
     }
 
     public boolean isPluginLoaded(String pluginName) {
@@ -143,13 +130,15 @@ public class CompatibilityManager implements RegionHandler {
         return this.palette;
     }
 
+    public IMapHandler getMapHandler() {
+        return mapHandler;
+    }
+
     public IHeadsRetriever getHeadsRetriever() {
         return headsRetriever;
     }
 
     private ReflectionHandler loadReflectionHandler() {
-        ReflectionHandler denizenHandler = new DenizenCompat();
-        if (denizenHandler.isLoaded()) return denizenHandler;
         return new VanillaReflectionHandler();
     }
 

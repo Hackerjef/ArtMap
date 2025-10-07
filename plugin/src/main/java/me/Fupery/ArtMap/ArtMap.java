@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import me.Fupery.ArtMap.api.Compatability.IMapHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.PluginCommand;
@@ -63,6 +64,7 @@ public class ArtMap extends JavaPlugin implements IArtMap {
 	private HeadsCache headsCache;
 	private final ConcurrentMap<Location, Easel> easels;
 	private Palette dyePalette;
+    private IMapHandler mapHandler;
 	private boolean recipesLoaded = false;
 	private boolean dbUpgradeNeeded;
 
@@ -126,6 +128,10 @@ public class ArtMap extends JavaPlugin implements IArtMap {
 		return this.reflection;
 	}
 
+    public IMapHandler getMapHandler() {
+        return this.mapHandler;
+    }
+
 	public ConcurrentMap<Location,Easel> getEasels() {
 		return this.easels;
 	}
@@ -171,6 +177,7 @@ public class ArtMap extends JavaPlugin implements IArtMap {
 			protocolHandler = new ProtocolHandler();
 			artistHandler = new ArtistHandler();
 			dyePalette = compatManager.getPalette();
+            mapHandler = compatManager.getMapHandler();
 			database = new Database(this);
 			dbUpgradeNeeded = this.checkIfDatabaseUpgradeNeeded();
 			this.getLogger().info(" MC version: " + bukkitVersion.toString() ) ;

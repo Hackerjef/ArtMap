@@ -23,6 +23,8 @@
 		<module>compatibility/Spigot_1_16</module>
 		<module>compatibility/Spigot_1_18</module>
 		<module>compatibility/Spigot_1_20_2</module>
+        <module>compatibility/Spigot_1_21_4</module>
+        <module>compatibility/Paper_1_21_8</module>
 		<!-- plugin compatibility -->
 		<module>compatibility/ASkyBlock</module>
 		<module>compatibility/BentoBox</module>
@@ -38,7 +40,6 @@
 		<module>compatibility/PlotSquared7</module>
 		<module>compatibility/RedProtect</module>
 		<module>compatibility/Residence</module>
-		<module>compatibility/SabreFactions</module>
 		<module>compatibility/Towny</module>
 		<module>compatibility/USkyBlock</module>
 		<module>compatibility/WorldGuard</module>
@@ -51,6 +52,10 @@
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
 		</repository>
+        <repository>
+            <id>paper-repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
 		<repository>
 			<id>sk89q-repo</id>
 			<url>https://maven.enginehub.org/repo/</url>

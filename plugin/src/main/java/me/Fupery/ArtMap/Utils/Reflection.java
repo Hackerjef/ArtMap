@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.bukkit.Bukkit;
-import org.bukkit.map.MapView;
 
 public class Reflection {
 
@@ -101,41 +100,5 @@ public class Reflection {
                     methodName, obj.getName(), Arrays.asList(obj.getMethods())), e);
         }
         return method.invoke(null, params);
-    }
-
-    public byte[] getMap(MapView mapView) {
-        byte[] colors;
-
-        try {
-            Object worldMap = getField(mapView, "worldMap");
-            try {
-                colors = (byte[]) getField(worldMap, "colors");
-            } catch (NoSuchFieldException e) {
-                //Then we must be on 1.17
-                colors = (byte[]) getField(worldMap, "g");
-            }
-        } catch (NoSuchFieldException | SecurityException
-                | IllegalArgumentException | IllegalAccessException e) {
-            colors = null;
-        }
-        if (colors == null) {
-            return new byte[128 * 128];
-        }
-        return colors;
-    }
-
-    public void setWorldMap(MapView mapView, byte[] colors) throws NoSuchFieldException, IllegalAccessException {
-            mapView.setCenterX(-999999);
-            mapView.setCenterZ(-999999);
-            
-            Object worldMap = getField(mapView, "worldMap");
-            try {
-                setField(worldMap, "colors", colors);
-            } catch (NoSuchFieldException e) {
-                //Then we must be on 1.17
-                setField(worldMap, "g", colors);
-            }
-
-            mapView.setScale(MapView.Scale.FARTHEST);
     }
 }

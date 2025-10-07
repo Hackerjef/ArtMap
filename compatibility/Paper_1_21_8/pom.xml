@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>Paper_1_21_8</artifactId>
+    <name>Paper_1_21_8</name>
+    <description>Paper 1.21.8 Compatibility</description>
+
+    <parent>
+        <groupId>com.gitlab.blockstack</groupId>
+        <artifactId>ArtMap-parent</artifactId>
+        <version>3.9.24</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <repositories>
+        <repository>
+            <id>pcgf-repo</id>
+            <url>https://repo.essentialsx.net/releases/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.gitlab.blockstack</groupId>
+            <artifactId>ArtMap-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.21.8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>authlib</artifactId>
+            <version>5.0.47</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

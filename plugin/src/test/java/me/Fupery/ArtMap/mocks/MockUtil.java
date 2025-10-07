@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import com.google.common.io.Files;
 import com.google.gson.GsonBuilder;
 
+import me.Fupery.ArtMap.Compatibility.impl.MapHandler_1_21_4;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -326,10 +327,11 @@ public class MockUtil {
 
          //mock Reflection 
          Reflection mockReflection = mock(Reflection.class);
+         MapHandler_1_21_4 mockHandler = mock(MapHandler_1_21_4.class);
          //have get map return an all white map
          byte[] mapOutput = new byte[Size.MAX.value];
          Arrays.fill(mapOutput, Byte.valueOf("0"));
-         when(mockReflection.getMap(any(MapView.class))).thenReturn(mapOutput);
+         when(mockHandler.getMap(any(MapView.class))).thenReturn(mapOutput);
          when(mockArtmap.getReflection()).thenReturn(mockReflection);
 
          //mock HeadsCahce

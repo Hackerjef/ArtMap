@@ -1,10 +1,10 @@
-name: ${project.name}
+name: artmap-fork
 main: me.Fupery.ArtMap.ArtMap
-version: ${project.version}
-description: ${project.description}
+version: 3.9.24-SNAPSHOT
+description: Make pixel art!
 depend: [ProtocolLib]
 softdepend: [WorldGuard, Factions, Denizen, GriefPrevention, RedProtect, Landlord, ASkyBlock, Residence, MarriageMaster, PlotSquared, Essentials, BentoBox, CMI, GriefDefender]
-author: [Wispoffates,(Original) Fupery]
+author: [hackerjef,ThatRandoJustin,Wispoffates,(Original) Fupery]
 api-version: 1.13
 
 commands:
