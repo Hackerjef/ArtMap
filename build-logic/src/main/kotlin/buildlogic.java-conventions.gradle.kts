@@ -78,7 +78,7 @@ dependencies {
 }
 
 group = "com.gitlab.blockstack"
-version = "3.9.24"
+version = "3.9.25"
 java.sourceCompatibility = JavaVersion.VERSION_21
 
 publishing {

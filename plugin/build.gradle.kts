@@ -25,6 +25,7 @@ dependencies {
     api(project(":Paper_1_21_7"))
     api(project(":Paper_1_21_8"))
     api(project(":Paper_1_21_9"))
+    api(project(":Paper_1_21_10"))
     api(project(":ASkyBlock"))
     api(project(":BentoBox"))
     api(project(":CMI"))
@@ -58,7 +59,6 @@ dependencies {
 }
 
 tasks.shadowJar {
-
     dependsOn(tasks.processResources)
     from(tasks.processResources.get().outputs)
 
