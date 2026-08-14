@@ -3,7 +3,7 @@ main: me.Fupery.ArtMap.ArtMap
 version: 3.9.25-SNAPSHOT
 description: Make pixel art!
 depend: [ProtocolLib]
-softdepend: [WorldGuard, Factions, Denizen, GriefPrevention, RedProtect, Landlord, ASkyBlock, Residence, MarriageMaster, PlotSquared, Essentials, BentoBox, CMI, GriefDefender]
+softdepend: [WorldGuard, Factions, Denizen, GriefPrevention, RedProtect, Landlord, ASkyBlock, Residence, MarriageMaster, PlotSquared, Essentials, BentoBox, CMI, GriefDefender, Towny]
 author: [hackerjef,ThatRandoJustin,Wispoffates,(Original) Fupery]
 api-version: 1.13
 
